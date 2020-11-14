@@ -10,12 +10,6 @@ import { MoviesService } from './services/movies.service';
 export class AppComponent {
   title = 'themoviedb-app';
 
-  constructor(private moviesService: MoviesService) {
-    this.moviesService.getNowPlaying().subscribe((data: NowPlayingResponse) => {
-      console.log(data);
-    },
-    (error) => {
-      console.log(error)
-    });
+  constructor() {
   }
 }
