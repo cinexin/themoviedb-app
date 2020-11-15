@@ -42,9 +42,10 @@ export class MoviesService {
     return this.http.get<NowPlayingResponse>(url, {params: this.params})
     .pipe(
       tap(() => {
-        this.page += 1;
         if (this.page === this.totalPages) {
           this.fullyLoaded = true;
+        } else {
+          this.page += 1;
         }
         this.loading = false;
       }),
