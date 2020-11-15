@@ -1,6 +1,9 @@
-<p>home works!</p>
+<h1 class="mb-5">PosterGrid</h1>
 <div class="row" *ngIf="movies.length > 0">
   <div class="col">
     <app-slideshow [movies]="movies"></app-slideshow>
   </div>
 </div>
+
+<h2 class="mt-5">Latest movies</h2>
+<app-movies-poster-grid *ngIf="movies.length > 0" [movies]="movies"></app-movies-poster-grid>
