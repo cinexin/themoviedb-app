@@ -41,17 +41,17 @@ export class MoviesService {
     this.loading = true;
     return this.http.get<NowPlayingResponse>(url, {params: this.params})
     .pipe(
+      map( response => {
+        this.totalPages = response.total_pages;
+        return response.results;
+      }),
       tap(() => {
-        if (this.page === this.totalPages) {
+        if (this.page >= this.totalPages) {
           this.fullyLoaded = true;
         } else {
           this.page += 1;
         }
         this.loading = false;
-      }),
-      map( response => {
-        this.totalPages = response.total_pages;
-        return response.results;
       })
     );
   }
