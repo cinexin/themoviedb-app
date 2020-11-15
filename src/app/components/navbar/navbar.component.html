@@ -1,3 +1,25 @@
+<!--<nav class="navbar navbar-expand-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/home">Movies</a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+      </ul>
+      <form class="form-inline d-flex my-2 my-lg-0">
+        <input #searchText
+          class="form-control mr-sm-2"
+          (keyup.enter)="searchMovie(searchText.value)">
+          type="search"
+          placeholder="Search movie"
+          aria-label="Search">
+        <button class="btn btn-outline-primary my-2 my-sm-0" (click)="searchMovie(searchText.value)"
+          (click)="searchMovie(searchText.value)" type="submit">
+          Search
+        </button>
+      </form>
+    </div>
+  </div>
+</nav>-->
 <nav class="navbar navbar-expand-sm">
   <a class="navbar-brand" routerLink="/home">Movies</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,9 +29,14 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search movie" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <div class="form-inline my-2 my-lg-0 mt-2">
+      <input #searchText
+        class="form-control mr-sm-2"
+        type="search"
+        placeholder="Search movie"
+        (keyup.enter)="searchMovie(searchText.value)"
+        aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="searchMovie(searchText.value)">Search</button>
+    </div>
   </div>
 </nav>

@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Movie, NowPlayingResponse } from '../../interfaces/now-playing-response';
+import { Movie } from 'src/app/interfaces/movie';
 import { MoviesService } from '../../services/movies.service';
 
 @Component({

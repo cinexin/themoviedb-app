@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { StarRatingComponent } from 'ng-starrating';
-import { Movie } from 'src/app/interfaces/now-playing-response';
+import { Movie } from 'src/app/interfaces/movie';
+
 
 @Component({
   selector: 'app-movies-poster-grid',

@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { Movie, NowPlayingResponse } from '../interfaces/now-playing-response';
+import { Movie } from '../interfaces/movie';
+import { NowPlayingResponse } from '../interfaces/now-playing-response';
+import { SearchMoviesResponse } from '../interfaces/search-movies-response';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +55,16 @@ export class MoviesService {
         }
         this.loading = false;
       })
+    );
+  }
+
+  search(searchTerm: string): Observable<Movie[]> {
+    const url = `${this.baseUrl}/search/movie/`;
+    const params = {...this.params, page: 1, query: searchTerm};
+    return this.http.get<SearchMoviesResponse>(url, {
+      params
+    }).pipe(
+      map((response) => response.results),
     );
   }
 }
