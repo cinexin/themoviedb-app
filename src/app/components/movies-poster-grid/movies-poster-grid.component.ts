@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { StarRatingComponent } from 'ng-starrating';
 import { Movie } from 'src/app/interfaces/movie';
 
@@ -12,7 +13,9 @@ export class MoviesPosterGridComponent implements OnInit {
 
   @Input() movies: Movie[] = [];
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     console.log(this.movies);
@@ -23,5 +26,9 @@ export class MoviesPosterGridComponent implements OnInit {
       New Value: ${$event.newValue},
       Checked Color: ${$event.starRating.checkedcolor},
       Unchecked Color: ${$event.starRating.uncheckedcolor}`);
+  }
+
+  openMovieDetail(movie: Movie): void {
+    this.router.navigate(['/movie', movie.id]);
   }
 }

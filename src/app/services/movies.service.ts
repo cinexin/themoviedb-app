@@ -5,6 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { Movie } from '../interfaces/movie';
 import { NowPlayingResponse } from '../interfaces/now-playing-response';
 import { SearchMoviesResponse } from '../interfaces/search-movies-response';
+import { MovieDetailResponse } from '../interfaces/movie-detail-response';
 
 @Injectable({
   providedIn: 'root'
@@ -70,5 +71,9 @@ export class MoviesService {
     }).pipe(
       map((response) => response.results),
     );
+  }
+
+  getMovieDetails(movieId: number): Observable<MovieDetailResponse> {
+    return this.http.get<MovieDetailResponse>(`${this.baseUrl}/movie/${movieId}`, {params: this.params});
   }
 }
