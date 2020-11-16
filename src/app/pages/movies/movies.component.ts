@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Cast } from 'src/app/interfaces/cast';
 import { MovieDetailResponse } from 'src/app/interfaces/movie-detail-response';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -12,23 +13,34 @@ import { MoviesService } from 'src/app/services/movies.service';
 export class MoviesComponent implements OnInit {
 
   movieDetail: MovieDetailResponse;
+  cast: Cast[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
     public moviesService: MoviesService,
     private location: Location,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
     const movieId = this.activatedRoute.snapshot.params.id;
     this.fetchMovieDetails(movieId);
-    console.log(`Movie Id: ${movieId}`);
+  }
+
+  private backToHome(): void {
+    this.router.navigateByUrl('/home');
   }
 
   fetchMovieDetails(movieId: number): void {
     this.moviesService.getMovieDetails(movieId).subscribe(movieDetails => {
+      if (!movieDetails) {
+        this.backToHome();
+        return;
+      }
       this.movieDetail = movieDetails;
-      console.log(`Movie details: ${this.movieDetail}`);
+    });
+    this.moviesService.getCast(movieId).subscribe(castDetails => {
+      this.cast = castDetails;
     });
   }
 
