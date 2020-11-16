@@ -33,6 +33,10 @@ export class MoviesService {
     };
   }
 
+  resetPageNum(): void {
+    this.page = 1;
+  }
+
   getNowPlaying(): Observable<Movie[]> {
     if (this.loading) {
       return of([]);
