@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
 import { Cast } from 'src/app/interfaces/cast';
 import { MovieDetailResponse } from 'src/app/interfaces/movie-detail-response';
 import { MoviesService } from 'src/app/services/movies.service';
@@ -32,15 +33,16 @@ export class MoviesComponent implements OnInit {
   }
 
   fetchMovieDetails(movieId: number): void {
-    this.moviesService.getMovieDetails(movieId).subscribe(movieDetails => {
-      if (!movieDetails) {
+    combineLatest([
+      this.moviesService.getMovieDetails(movieId),
+      this.moviesService.getCast(movieId)
+    ]).subscribe(([movie, cast]) => {
+      if (!movie) {
         this.backToHome();
         return;
       }
-      this.movieDetail = movieDetails;
-    });
-    this.moviesService.getCast(movieId).subscribe(castDetails => {
-      this.cast = castDetails;
+      this.movieDetail = movie;
+      this.cast = cast;
     });
   }
 
